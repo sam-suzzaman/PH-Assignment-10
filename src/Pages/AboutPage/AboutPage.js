@@ -1,0 +1,8 @@
+import React from "react";
+import "./AboutPage.css";
+
+const AboutPage = () => {
+    return <div>this is about page</div>;
+};
+
+export default AboutPage;
