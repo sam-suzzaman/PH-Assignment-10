@@ -1,0 +1,12 @@
+footer {
+    margin-top: 4rem;
+    padding: 1.5rem 1rem;
+    background-color: #3a3845;
+}
+.footer-text {
+    color: #fff;
+    text-transform: capitalize;
+    text-align: center;
+    font-size: calc(0.75rem + 0.25vw);
+    font-weight: 300;
+}
