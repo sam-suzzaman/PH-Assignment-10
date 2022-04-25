@@ -9,6 +9,7 @@ import CheckOutPage from "./Pages/CheckOutPage/CheckOutPage";
 import LogInPage from "./Pages/LogInPage/LogInPage";
 import SignUpPage from "./Pages/SignUpPage/SignUpPage";
 import NotFoundPage from "./Pages/404Page/NotFoundPage";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
     return (

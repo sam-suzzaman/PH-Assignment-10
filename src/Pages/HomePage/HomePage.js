@@ -1,8 +1,13 @@
 import React from "react";
+import CarouselCom from "../../Components/Carousel/CarouselCom";
 import "./HomePage.css";
 
 const HomePage = () => {
-    return <div>this is homepage</div>;
+    return (
+        <div>
+            <CarouselCom />
+        </div>
+    );
 };
 
 export default HomePage;
