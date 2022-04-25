@@ -1,7 +1,7 @@
 .navbar-container {
     position: sticky;
     top: 0;
-    padding: 1.5rem 4rem;
+    padding: 1rem 4rem;
     background-color: #3a3845;
     display: flex;
     justify-content: space-between;
@@ -15,6 +15,10 @@
     font-weight: bold;
     letter-spacing: 1px;
     font-size: 1.75rem;
+}
+.brand a img {
+    width: 100%;
+    object-fit: cover;
 }
 
 .main-menu a {
@@ -45,7 +49,7 @@ a.active {
         flex-direction: column;
         justify-content: flex-start;
         align-items: flex-start;
-        padding: 1.5rem;
+        padding: 1rem 1.5rem;
     }
     .logo {
         width: 100%;
@@ -56,11 +60,14 @@ a.active {
     .brand a {
         font-size: 1.5rem;
     }
+    .brand a img {
+        max-width: 150px;
+    }
     .menu-toggler {
         display: block;
     }
     .main-menu {
-        padding: 0 1.5rem 1.5rem;
+        padding: 10px 1.5rem 1.5rem;
         position: absolute;
         top: -200px;
         left: 0;
@@ -71,7 +78,7 @@ a.active {
         transition: all 0.3s ease-in;
     }
     .main-menu.show {
-        top: 80px;
+        top: 60px;
         left: 0;
     }
     .main-menu a {
