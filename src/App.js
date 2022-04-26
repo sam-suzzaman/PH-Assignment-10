@@ -10,6 +10,7 @@ import LogInPage from "./Pages/LogInPage/LogInPage";
 import SignUpPage from "./Pages/SignUpPage/SignUpPage";
 import NotFoundPage from "./Pages/404Page/NotFoundPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import PasswordReset from "./Components/PasswordReset/PasswordReset";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/checkout" element={<CheckOutPage />} />
                 <Route path="/signIn" element={<LogInPage />} />
                 <Route path="/signUp" element={<SignUpPage />} />
+                <Route path="/passwordReset" element={<PasswordReset />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
             <Footer />

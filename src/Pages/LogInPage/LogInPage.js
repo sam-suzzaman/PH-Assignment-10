@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./LogInPage.css";
 import {
+    useSendPasswordResetEmail,
     useSignInWithEmailAndPassword,
     useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
@@ -13,6 +14,8 @@ const LogInPage = () => {
         useSignInWithEmailAndPassword(firebaseAuth);
     const [signInWithGoogle, googleUser, googleLoading, googleError] =
         useSignInWithGoogle(firebaseAuth);
+    const [sendPasswordResetEmail, sending, passwordResetError] =
+        useSendPasswordResetEmail(firebaseAuth);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -55,7 +58,9 @@ const LogInPage = () => {
                     marginBottom: "1rem",
                 }}
             >
-                {error?.message || googleError?.message}
+                {error?.message ||
+                    googleError?.message ||
+                    passwordResetError?.message}
             </h4>
             <h3 className="form-title">login form</h3>
             <form onSubmit={handleLogInSubmit}>
@@ -94,7 +99,13 @@ const LogInPage = () => {
                         />
                         <label htmlFor="checkbox">remember me</label>
                     </div>
-                    <p className="forget-password">forget password</p>
+                    {/* <p
+                        className="forget-password"
+                        onClick={handleResetPassword}
+                    >
+                        forget password
+                    </p> */}
+                    <NavLink to="/passwordReset">forget password</NavLink>
                 </div>
                 <input className="submit-btn" type="submit" value="login" />
                 <p className="form-text">
