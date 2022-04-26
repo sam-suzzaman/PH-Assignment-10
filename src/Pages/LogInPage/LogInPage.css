@@ -11,6 +11,9 @@
     margin-bottom: 5rem;
     border-radius: 4px;
 }
+.form-container .error {
+    color: red;
+}
 .form-title {
     font-size: calc(1.15rem + 0.5vw);
     text-transform: uppercase;

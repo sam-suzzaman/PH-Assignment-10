@@ -1,41 +1,140 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import firebaseAuth from "./../../firebase.init";
 
 const SignUpPage = () => {
+    const [createUserWithEmailAndPassword, user, loading, error] =
+        useCreateUserWithEmailAndPassword(firebaseAuth);
+
+    const [userName, setUserName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [remember, setRemember] = useState(false);
+
+    // error handle
+    const [userNameError, setUserNameError] = useState(false);
+    const [emailError, setemailError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
+    const [passwordMatchError, setPasswordMatchError] = useState(false);
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+
+        // checking inputs
+        if (!/^[a-zA-Z0-9]+$/.test(userName)) {
+            setUserNameError(true);
+        } else if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(email)) {
+            setemailError(true);
+        } else if (password.length < 6) {
+            setPasswordError(true);
+        } else if (password !== confirmPassword) {
+            setPasswordMatchError(true);
+        } else {
+            createUserWithEmailAndPassword(email, password);
+            setUserName("");
+            setEmail("");
+            setPassword("");
+            setConfirmPassword("");
+            setRemember(false);
+            // for errors
+            setUserNameError(false);
+            setemailError(false);
+            setPasswordError(false);
+            setPasswordMatchError(false);
+        }
+    };
+
     return (
         <div className="form-container">
+            <h4
+                style={{
+                    textAlign: "center",
+                    fontSize: "0.8rem",
+                    color: "red",
+                    marginBottom: "1rem",
+                }}
+            >
+                {error?.message}
+            </h4>
             <h3 className="form-title">signup form</h3>
-            <form>
+            <form onSubmit={handleFormSubmit}>
                 <div className="input-control">
                     <label htmlFor="email">enter Your name:</label>
-                    <input type="email" name="email" id="" />
+                    <input
+                        required
+                        type="text"
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                        name="email"
+                        id=""
+                    />
+                    {userNameError && (
+                        <p className="error">
+                            Username only contains Uppercase,Lowercase,Numberr
+                        </p>
+                    )}
                 </div>
                 <div className="input-control">
                     <label htmlFor="email">enter Your email:</label>
-                    <input type="email" name="email" id="" />
+                    <input
+                        required
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        name="email"
+                        id=""
+                    />
+                    {emailError && <p className="error">enter a valid email</p>}
                 </div>
                 <div className="input-control">
                     <label htmlFor="password">enter Your password:</label>
-                    <input type="password" name="password" id="" />
+                    <input
+                        required
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        name="password"
+                        id=""
+                    />
+                    {passwordError && (
+                        <p className="error">Password length be atleast 6</p>
+                    )}
                 </div>
                 <div className="input-control">
                     <label htmlFor="password">enter confirm password:</label>
-                    <input type="password" name="password" id="" />
+                    <input
+                        required
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        name="password"
+                        id=""
+                    />
+                    {passwordMatchError && (
+                        <p className="error">Password not matched</p>
+                    )}
                 </div>
-                <div className="form-info-row">
+                {/* <div className="form-info-row">
                     <div className="check-box">
-                        <input type="checkbox" name="checkbox" id="checkbox" />
+                        <input
+                            type="checkbox"
+                            checked={remember}
+                            onChange={(e) => setRemember(e.target.checked)}
+                            name="checkbox"
+                            id="checkbox"
+                        />
                         <label htmlFor="checkbox">remember me</label>
                     </div>
                     <p className="forget-password">forget password</p>
-                </div>
+                </div> */}
                 <input className="submit-btn" type="submit" value="sign up" />
                 <p className="form-text">
                     already have an account? <Link to="/signIn">log in</Link>
                 </p>
             </form>
-            <div className="form-footer">
-                {/* social login  */}
+            {/* <div className="form-footer">
                 <div className="form-divider">
                     <div className="divider-left divider"></div>
                     <p className="divider-text">or</p>
@@ -43,19 +142,19 @@ const SignUpPage = () => {
                 </div>
                 <div className="social-login-container">
                     <button>
-                        <i class="fa-brands fa-google"></i>{" "}
+                        <i className="fa-brands fa-google"></i>{" "}
                         <span className="btn-text">google</span>
                     </button>
-                    {/* <button>
-                        <i class="fa-brands fa-github"></i>{" "}
+                    <button>
+                        <i className="fa-brands fa-github"></i>{" "}
                         <span className="btn-text">github</span>
                     </button>
                     <button>
-                        <i class="fa-brands fa-facebook"></i>{" "}
+                        <i className="fa-brands fa-facebook"></i>{" "}
                         <span className="btn-text">facebook</span>
-                    </button> */}
+                    </button>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
