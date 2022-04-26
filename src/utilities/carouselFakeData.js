@@ -1,6 +1,6 @@
-import bannerImg1 from "./../assets/img/banner1.jpg";
-import bannerImg2 from "./../assets/img/banner2.jpg";
-import bannerImg3 from "./../assets/img/banner3.jpg";
+import bannerImg3 from "./../assets/img/banner/banner3.jpg";
+import bannerImg1 from "./../assets/img/banner/banner1.jpg";
+import bannerImg2 from "./../assets/img/banner/banner2.jpg";
 
 const carouselFakeData = [
     {
