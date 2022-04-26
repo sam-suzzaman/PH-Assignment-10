@@ -4,7 +4,7 @@ import { BadgeCheckIcon } from "@heroicons/react/solid";
 import LearningButton from "../LearningButton/LearningButton";
 
 const Service = (props) => {
-    const { image, title, des } = props.service;
+    const { image, title, des, price } = props.service;
     return (
         <div className="service-card">
             <div className="img-container">
@@ -22,6 +22,9 @@ const Service = (props) => {
                         );
                     })}
                 </ul>
+                <div className="course-price">
+                    <h4>মূল্য-{price}</h4>
+                </div>
             </div>
             <div className="service-card-footer">
                 <LearningButton btnName="checkout" />
