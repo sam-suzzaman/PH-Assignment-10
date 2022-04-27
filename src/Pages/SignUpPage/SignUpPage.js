@@ -5,11 +5,13 @@ import {
     useSendEmailVerification,
 } from "react-firebase-hooks/auth";
 import firebaseAuth from "./../../firebase.init";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUpPage = () => {
     const [createUserWithEmailAndPassword, user, loading, error] =
         useCreateUserWithEmailAndPassword(firebaseAuth);
-    const [sendEmailVerification, sending, error2] =
+    const [sendEmailVerification, sending, verificationError] =
         useSendEmailVerification(firebaseAuth);
 
     const [userName, setUserName] = useState("");
@@ -48,6 +50,7 @@ const SignUpPage = () => {
                 setemailError(false);
                 setPasswordError(false);
                 setPasswordMatchError(false);
+                toast("Account Created Successfully");
                 //email verification
                 handleEmailVerification();
             });
@@ -69,7 +72,7 @@ const SignUpPage = () => {
                     marginBottom: "1rem",
                 }}
             >
-                {error?.message || error2?.message}
+                {error?.message || verificationError?.message}
             </h4>
             <h3 className="form-title">signup form</h3>
             <form onSubmit={handleFormSubmit}>
@@ -168,6 +171,7 @@ const SignUpPage = () => {
                     </button>
                 </div>
             </div> */}
+            <ToastContainer />
         </div>
     );
 };

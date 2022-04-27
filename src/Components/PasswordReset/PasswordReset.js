@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-
 import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 import firebaseAuth from "../../firebase.init";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PasswordReset = () => {
     const [email, setEmail] = useState("");
     const [sendPasswordResetEmail, sending, error] =
         useSendPasswordResetEmail(firebaseAuth);
 
-    const handlePasswordReset = async () => {
-        await sendPasswordResetEmail(email);
-        alert("Reset Email Sent");
-        setEmail("");
+    const handlePasswordReset = (e) => {
+        e.preventDefault();
+        sendPasswordResetEmail(email).then(() => {
+            toast("Reset Email Sent");
+            setEmail("");
+        });
     };
 
     return (
@@ -30,6 +33,7 @@ const PasswordReset = () => {
                 </div>
                 <input className="submit-btn" type="submit" value="submit" />
             </form>
+            <ToastContainer />
         </div>
     );
 };

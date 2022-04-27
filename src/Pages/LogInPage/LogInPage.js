@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./LogInPage.css";
 import {
-    useSendEmailVerification,
     useSignInWithEmailAndPassword,
     useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
-
 import firebaseAuth from "../../firebase.init";
 
 const LogInPage = () => {
@@ -50,7 +48,8 @@ const LogInPage = () => {
         }
     };
 
-    const handleGoogleSignIn = () => {
+    const handleGoogleSignIn = (e) => {
+        e.preventDefault();
         signInWithGoogle().then(() => {
             navigate(from, { replace: true });
         });
