@@ -55,7 +55,9 @@
 .service-card-footer {
     margin-top: 2rem;
 }
-
+.service-card-footer a {
+    text-decoration: none;
+}
 @media (max-width: 576px) {
     .service-card {
         max-width: 400px;

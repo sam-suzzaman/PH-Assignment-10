@@ -2,6 +2,7 @@ import React from "react";
 import "./service.css";
 import { BadgeCheckIcon } from "@heroicons/react/solid";
 import LearningButton from "../LearningButton/LearningButton";
+import { Link } from "react-router-dom";
 
 const Service = (props) => {
     const { image, title, des, price } = props.service;
@@ -27,7 +28,9 @@ const Service = (props) => {
                 </div>
             </div>
             <div className="service-card-footer">
-                <LearningButton btnName="checkout" />
+                <Link to="/checkout">
+                    <LearningButton btnName="checkout" />
+                </Link>
             </div>
         </div>
     );
