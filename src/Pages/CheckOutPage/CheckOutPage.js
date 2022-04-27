@@ -84,7 +84,7 @@ const CheckOutPage = () => {
                 </div>
                 <input
                     disabled={termsStatus ? false : true}
-                    className="submit-btn"
+                    className={`submit-btn ${!termsStatus && "disabled-case"}`}
                     type="submit"
                     value="submit"
                 />

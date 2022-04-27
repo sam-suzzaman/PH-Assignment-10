@@ -93,6 +93,13 @@
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
+.submit-btn.disabled-case {
+    background: #c5c5c5;
+    color: #ddd;
+    border: none;
+    cursor: not-allowed;
+}
+
 .submit-btn:hover {
     background-color: transparent;
     color: #018227;
@@ -100,6 +107,12 @@
         -3px 3px 8px rgba(1, 130, 40, 0.2), 3px -3px 8px rgba(1, 130, 40, 0.2),
         -3px -3px 8px rgba(1, 130, 40, 0.2);
 }
+.submit-btn.disabled-case:hover {
+    box-shadow: none;
+    background: #c5c5c5;
+    color: #ddd;
+}
+
 .form-text {
     text-align: center;
     font-size: 0.9rem;
