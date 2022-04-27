@@ -24,10 +24,26 @@
 
 .carousel-item .carousel-caption h3 {
     font-size: calc(1rem + 0.75vw);
+    color: #ffbc58;
+    margin-bottom: 0.75rem;
 }
 .carousel-item .carousel-caption p {
     font-size: calc(0.75rem + 0.25vw);
-    color: rgba(255, 255, 255, 0.829);
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+@media (min-width: 550px) {
+    .carousel.slide {
+        max-height: 400px;
+        position: relative;
+        overflow: hidden;
+    }
+    .carousel-inner {
+        max-height: 400px;
+    }
+    .carousel .carousel-item {
+        position: static;
+    }
 }
 
 @media (max-width: 400px) {

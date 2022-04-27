@@ -6,7 +6,7 @@
 }
 
 .service-container .sec-title {
-    font-size: calc(1.25rem + 1.25vw);
+    font-size: calc(1.2rem + 0.75vw);
     text-transform: uppercase;
     text-align: center;
     opacity: 0.8;

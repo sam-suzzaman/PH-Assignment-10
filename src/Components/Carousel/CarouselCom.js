@@ -23,7 +23,7 @@ const CarouselCom = () => {
                             />
                         </div>
                         <Carousel.Caption>
-                            <h3>{item.title}</h3>
+                            <h3>- {item.title} -</h3>
                             <p>{item.des}</p>
                         </Carousel.Caption>
                     </Carousel.Item>
