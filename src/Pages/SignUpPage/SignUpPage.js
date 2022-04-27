@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+    useCreateUserWithEmailAndPassword,
+    useSendEmailVerification,
+} from "react-firebase-hooks/auth";
 import firebaseAuth from "./../../firebase.init";
 
 const SignUpPage = () => {
     const [createUserWithEmailAndPassword, user, loading, error] =
         useCreateUserWithEmailAndPassword(firebaseAuth);
+    const [sendEmailVerification, sending, error2] =
+        useSendEmailVerification(firebaseAuth);
 
     const [userName, setUserName] = useState("");
     const [email, setEmail] = useState("");
@@ -32,18 +37,26 @@ const SignUpPage = () => {
         } else if (password !== confirmPassword) {
             setPasswordMatchError(true);
         } else {
-            createUserWithEmailAndPassword(email, password);
-            setUserName("");
-            setEmail("");
-            setPassword("");
-            setConfirmPassword("");
-            setRemember(false);
-            // for errors
-            setUserNameError(false);
-            setemailError(false);
-            setPasswordError(false);
-            setPasswordMatchError(false);
+            createUserWithEmailAndPassword(email, password).then(() => {
+                setUserName("");
+                setEmail("");
+                setPassword("");
+                setConfirmPassword("");
+                setRemember(false);
+                // for errors
+                setUserNameError(false);
+                setemailError(false);
+                setPasswordError(false);
+                setPasswordMatchError(false);
+                //email verification
+                handleEmailVerification();
+            });
         }
+    };
+
+    const handleEmailVerification = async () => {
+        await sendEmailVerification();
+        console.log("mail send");
     };
 
     return (
@@ -56,7 +69,7 @@ const SignUpPage = () => {
                     marginBottom: "1rem",
                 }}
             >
-                {error?.message}
+                {error?.message || error2?.message}
             </h4>
             <h3 className="form-title">signup form</h3>
             <form onSubmit={handleFormSubmit}>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./LogInPage.css";
 import {
-    useSendPasswordResetEmail,
+    useSendEmailVerification,
     useSignInWithEmailAndPassword,
     useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
@@ -14,8 +14,6 @@ const LogInPage = () => {
         useSignInWithEmailAndPassword(firebaseAuth);
     const [signInWithGoogle, googleUser, googleLoading, googleError] =
         useSignInWithGoogle(firebaseAuth);
-    const [sendPasswordResetEmail, sending, passwordResetError] =
-        useSendPasswordResetEmail(firebaseAuth);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -24,6 +22,12 @@ const LogInPage = () => {
     // errors
     const [emailError, setEmailError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+
+    // for private route
+    let navigate = useNavigate();
+    let location = useLocation();
+
+    let from = location.state?.from?.pathname || "/";
 
     const handleLogInSubmit = (e) => {
         e.preventDefault();
@@ -34,18 +38,22 @@ const LogInPage = () => {
             setEmailError(false);
             setPasswordError(true);
         } else {
-            signInWithEmailAndPassword(email, password);
-            setEmail("");
-            setPassword("");
-            setRemember(false);
-            // for error
-            setEmailError(false);
-            setPasswordError(false);
+            signInWithEmailAndPassword(email, password).then(() => {
+                setEmail("");
+                setPassword("");
+                setRemember(false);
+                // for error
+                setEmailError(false);
+                setPasswordError(false);
+                navigate(from, { replace: true });
+            });
         }
     };
 
     const handleGoogleSignIn = () => {
-        signInWithGoogle();
+        signInWithGoogle().then(() => {
+            navigate(from, { replace: true });
+        });
     };
 
     return (
@@ -58,9 +66,7 @@ const LogInPage = () => {
                     marginBottom: "1rem",
                 }}
             >
-                {error?.message ||
-                    googleError?.message ||
-                    passwordResetError?.message}
+                {error?.message || googleError?.message}
             </h4>
             <h3 className="form-title">login form</h3>
             <form onSubmit={handleLogInSubmit}>

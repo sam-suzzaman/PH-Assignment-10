@@ -11,6 +11,7 @@ import SignUpPage from "./Pages/SignUpPage/SignUpPage";
 import NotFoundPage from "./Pages/404Page/NotFoundPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PasswordReset from "./Components/PasswordReset/PasswordReset";
+import RequireAuth from "./utilities/RequireRoute";
 
 function App() {
     return (
@@ -20,7 +21,14 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/blog" element={<BlogPage />} />
-                <Route path="/checkout" element={<CheckOutPage />} />
+                <Route
+                    path="/checkout"
+                    element={
+                        <RequireAuth>
+                            <CheckOutPage />
+                        </RequireAuth>
+                    }
+                />
                 <Route path="/signIn" element={<LogInPage />} />
                 <Route path="/signUp" element={<SignUpPage />} />
                 <Route path="/passwordReset" element={<PasswordReset />} />
